@@ -1,0 +1,14 @@
+# systemd ユーザーサービス: ~/.config/systemd/user/sogei.service にリンクして使う
+[Unit]
+Description=送迎管理システム (Node.js)
+After=network-online.target
+
+[Service]
+WorkingDirectory=%h/devpi202610/server
+ExecStart=%h/.local/node/bin/node --env-file=%h/devpi202610/.env src/index.ts
+Restart=on-failure
+RestartSec=3
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=default.target
